@@ -1,17 +1,25 @@
 pipeline {
-   agent any
-   parameters {
-       string(name: 'USERNAME', defaultValue: 'guest', description: 'Enter your username')
-       booleanParam(name: 'DEPLOY', defaultValue: false, description: 'Deploy after build?')
-       choice(name: 'ENVIRONMENT', choices: ['dev', 'staging', 'prod'], description: 'Select environment')
-   }
+   agent {label 'agent1'}
    stages {
-       stage('Display Parameters') {
+       stage('Compiling java program') {
            steps {
-               echo "Username: ${params.USERNAME}"
-               echo "Deploy: ${params.DEPLOY}"
-               echo "Environment: ${params.ENVIRONMENT}"
+               script{
+                  bat '''
+                  javac Main.java
+                  java Main
+                  '''
+               }
            }
        }
+      stage('Archive Build Artifact') {
+            steps {
+                archiveArtifacts artifacts: '*.class', fingerprint: true
+            }
+        }
+   }
+   post{
+      always{
+         cleanWs()
+      }
    }
 }
