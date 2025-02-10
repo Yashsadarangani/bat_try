@@ -1,6 +1,8 @@
 pipeline {
     agent { label 'agent1' }
-
+    tools {
+        git '/usr/bin/git'
+    }
     stages {
         stage('Compiling Java Program') {
             steps {
