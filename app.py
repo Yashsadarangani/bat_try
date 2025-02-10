@@ -1,4 +1,3 @@
-import numpy as np
- 
-print(np.sin(np.pi/2.))
-print ("Hello World")
+import nltk
+
+print("NLTK Version:", nltk.__version__)
