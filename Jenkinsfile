@@ -1,13 +1,21 @@
 pipeline {
     agent { label 'agent1' }
+
     tools {
-        git '/usr/bin/git'
+        git 'Git-in-Docker'  // Use the Git tool configured in Jenkins
     }
+
     stages {
+        stage('Checkout Code') {
+            steps {
+                checkout scm
+            }
+        }
+
         stage('Compiling Java Program') {
             steps {
                 script {
-                    bat '''
+                    sh '''
                     javac Main.java
                     java Main
                     '''
