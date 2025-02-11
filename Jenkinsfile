@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'agent1' }
+    agent { label 'Built-In Node' }
 
     stages {
         stage('Checkout Code') {
