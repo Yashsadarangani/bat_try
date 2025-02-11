@@ -1,10 +1,6 @@
 pipeline {
     agent { label 'agent1' }
 
-    tools {
-        git 'Git-in-Docker'  // Use the Git tool configured in Jenkins
-    }
-
     stages {
         stage('Checkout Code') {
             steps {
