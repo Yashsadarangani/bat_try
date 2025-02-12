@@ -1,0 +1,11 @@
+pipeline {
+    agent { label 'agent1' }
+    stages {
+        stage('run') {
+            steps {
+                sh 'python3 app.py > flask.log 2>&1 &'
+                sh 'tail -f flask.log'
+            }
+        }
+    }
+}
