@@ -3,10 +3,10 @@ pipeline {
     stages {
         stage('run') {
             steps {
-                sh 'python3 app.py > flask.log 2>&1 &'
-                sh 'tail -f flask.log'
                 sh 'ls -l'
                 sh 'pwd'
+                sh 'python3 app.py > flask.log 2>&1 &'
+                sh 'tail -f flask.log'
                 archiveArtifacts artifacts: 'bat_try/flask.log'
                 archiveArtifacts artifacts: 'bat_try/app.py'
             }
