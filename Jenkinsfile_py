@@ -5,7 +5,9 @@ pipeline {
             steps {
                 sh 'ls -l'
                 sh 'pwd'
+                timeout(time:20, unit:'SECONDS'){
                 sh 'python3 app.py > flask.log 2>&1 &'
+                }
                 sh 'tail -f flask.log'
                 archiveArtifacts artifacts: 'bat_try/flask.log'
                 archiveArtifacts artifacts: 'bat_try/app.py'
